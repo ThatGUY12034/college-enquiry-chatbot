@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CampusAsk – College Enquiry Chatbot</title>
+  <meta name="description" content="College enquiry chatbot using NLP (tokenization, stemming, TF-IDF and cosine similarity) in the browser." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>
+      </span>
+      <div>
+        <h1>CampusAsk</h1>
+        <p>College Enquiry Chatbot · Natural Language Processing</p>
+      </div>
+    </div>
+    <div class="badges">
+      <span class="badge">TF-IDF + Cosine Similarity</span>
+      <span class="badge ok">Runs in your browser</span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <!-- Chat -->
+    <section class="chat-card" aria-label="Chat">
+      <div class="chat-head">
+        <div class="avatar" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 3v4"/><circle cx="9" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/></svg>
+        </div>
+        <div>
+          <h2>College Enquiry Assistant</h2>
+          <span class="online"><i></i>Online · answers instantly</span>
+        </div>
+        <button id="clearBtn" class="ghost" type="button" title="Start a new conversation">New chat</button>
+      </div>
+
+      <div id="messages" class="messages" role="log" aria-live="polite"></div>
+
+      <div class="topics" id="topics" aria-label="Quick topics"></div>
+
+      <form id="chatForm" class="composer" autocomplete="off">
+        <label for="question" class="sr-only">Type your question</label>
+        <input id="question" maxlength="300" placeholder="Ask about admissions, fees, courses, placements…" />
+        <button type="submit" class="send" aria-label="Send">
+          <svg viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+        </button>
+      </form>
+    </section>
+
+    <!-- NLP inspector -->
+    <aside class="inspector" aria-label="NLP pipeline inspector">
+      <div class="insp-head">
+        <h2>NLP Inspector</h2>
+        <p>How the last question was understood</p>
+      </div>
+
+      <div id="inspectorEmpty" class="insp-empty">Ask a question to see each NLP step: tokenization, stop-word removal, stemming and TF-IDF matching.</div>
+
+      <div id="inspector" hidden>
+        <div class="step">
+          <h3><span>1</span>Tokenization</h3>
+          <div id="stTokens" class="chips"></div>
+        </div>
+        <div class="step">
+          <h3><span>2</span>Normalization &amp; stop-word removal</h3>
+          <div id="stFiltered" class="chips"></div>
+        </div>
+        <div class="step">
+          <h3><span>3</span>Porter stemming</h3>
+          <div id="stStems" class="chips"></div>
+        </div>
+        <div class="step">
+          <h3><span>4</span>TF-IDF cosine similarity</h3>
+          <div id="stScores" class="scores"></div>
+        </div>
+        <div id="stDecision" class="decision"></div>
+      </div>
+
+      <div class="kb-stats" id="kbStats"></div>
+    </aside>
+  </main>
+
+  <footer class="foot">CampusAsk · NLP chatbot built with HTML, CSS and JavaScript. For exact fees, cut-offs and dates, always refer to official college and CET Cell notices.</footer>
+
+  <script src="js/nlp.js"></script>
+  <script src="js/knowledge.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
